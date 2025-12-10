@@ -1,27 +1,45 @@
-import type { SelectHTMLAttributes } from 'react'
-import { cn } from '@/lib/utils'
+import {
+  Select as ShadSelect,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from '@/components/ui/select'
 
-export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {}
+interface Option {
+  label: string
+  value: string
+}
 
-export function Select({ className, children, ...props }: SelectProps) {
+interface Props {
+  options?: Option[]
+  placeholder?: string
+  value?: string
+  onChange?: (val: string) => void
+  className?: string
+  children?: React.ReactNode
+}
+
+export default function Select({
+  options,
+  placeholder,
+  value,
+  onChange,
+  className,
+}: Props) {
   return (
-    <div className="relative w-full">
-      <select
-        className={cn(
-          'w-full appearance-none rounded-[8px] border border-[#ECECEC] bg-white px-4 py-3 text-sm text-[#5C5B5E]',
-          'focus:border-[#9747FF] focus:ring-2 focus:ring-[#9747FF33] focus:outline-none',
-          'pr-10', // 오른쪽 아이콘 여백
-          className
-        )}
-        {...props}
-      >
-        {children}
-      </select>
+    <ShadSelect value={value} onValueChange={onChange}>
+      <SelectTrigger className={className}>
+        <SelectValue placeholder={placeholder} />
+      </SelectTrigger>
 
-      {/* ▼ 아이콘 */}
-      <span className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-xs text-[#A1A1A1]">
-        ▼
-      </span>
-    </div>
+      <SelectContent>
+        {options?.map((opt) => (
+          <SelectItem key={opt.value} value={opt.value}>
+            {opt.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </ShadSelect>
   )
 }
