@@ -1,7 +1,5 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
-@import '@uiw/react-md-editor/dist/mdeditor.css';
-@import '@uiw/react-markdown-preview/dist/markdown.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -110,6 +108,22 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --color-primary: #9747ff;
+  --color-primary-hover: #7c2dff;
+  --color-primary-disabled: #e6d3ff;
+
+  --color-gray-100: #f6f6f6;
+  --color-gray-200: #ececec;
+  --color-gray-400: #a1a1a1;
+  --color-gray-500: #858597;
+  --color-gray-600: #5c5b5e;
+  --color-gray-900: #000000;
+
+  --color-success: #04c73d;
+
+  :root {
+    --radius: 8px;
+  }
 }
 
 @layer base {
