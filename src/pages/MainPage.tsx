@@ -1,4 +1,5 @@
 import SearchBar from '@/components/questions/SearchBar'
+import SortMenu from '@/components/questions/SortingMenu'
 import Tabs from '@/components/questions/Tabs'
 import { Link } from 'react-router'
 
@@ -19,6 +20,9 @@ export default function MainPage() {
       </section>
       <section className="mb-6">
         <Tabs />
+      </section>
+      <section className="mb-6">
+        <SortMenu />
       </section>
     </main>
   )
