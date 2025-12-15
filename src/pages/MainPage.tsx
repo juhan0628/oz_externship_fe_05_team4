@@ -70,3 +70,19 @@ export default function MainPage() {
     </>
   )
 }
+;<section className="mb-6 flex items-center justify-between gap-4">
+  <div className="relative flex-1">
+    <input
+      type="text"
+      placeholder="질문 검색"
+      className="h-10 w-full rounded-full border border-[#ECECEC] bg-[#FAFAFA] px-10 text-sm outline-none focus:border-[#6201E0]"
+    />
+    <span className="absolute top-1/2 left-4 -translate-y-1/2 text-xs text-[#9D9D9D]">
+      🔍
+    </span>
+  </div>
+
+  <button className="h-10 rounded-full bg-[#6201E0] px-5 text-sm font-semibold text-white hover:bg-[#721AE3]">
+    질문 등록하기
+  </button>
+</section>
