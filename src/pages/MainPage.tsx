@@ -28,6 +28,10 @@ function MainPage() {
           <Link to="/Question/Create">
             <Button variant="outline">Create Page</Button>
           </Link>
+
+          <Link to="/Question/Edit/1">
+            <Button variant="outline">Edit Page</Button>
+          </Link>
         </div>
       </section>
 
