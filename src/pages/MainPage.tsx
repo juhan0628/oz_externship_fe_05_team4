@@ -8,29 +8,40 @@ import QuestionCard from '@/components/questions/QuestionCard'
 export default function MainPage() {
   const [sort, setSort] = useState<'latest' | 'oldest'>('latest')
 
-  // 임시 데이터 (백엔드 나오기 전 UI 테스트용)
+  // 임시 데이터
   const questions = [
     {
       id: 1,
-      title: 'Django ORM 역참조는 어떻게 사용하나요?',
-      preview: 'related_name을 지정하면 역참조가 가능합니다...',
-      answers: 3,
-      views: 87,
-      time: '3시간 전',
+      categories: ['프론트엔드', '프로그래밍 언어', 'Python'],
+      title: '오류가 발생했다고 뜨네요.',
+      preview:
+        '실행 결과오류가 발생했어요. AI 코드리뷰로 왜 오류가 발생했는지 확인해 보세요...',
+      answers: 2,
+      views: 60,
+      time: '1시간 전',
       thumbnail: null,
-      solved: true,
+      author: {
+        name: '김태산',
+        profile: 'https://cdn.ozcodingschool.com/profiles/user_123.png',
+      },
     },
     {
       id: 2,
-      title: 'React 상태관리 어떤걸 써야할까요?',
-      preview: 'Context, Redux Toolkit, Zustand 중 고민입니다...',
+      categories: ['프론트엔드', '프로그래밍 언어', 'Python'],
+      title: 'now 함수를 써야 하는 상황 예시에 대해서',
+      preview:
+        '각 row마다 시간 계산 처리를 다르게 해야 하는 경우라면 now 함수를 쓰는 게 좋을 것 같습니다...',
       answers: 1,
-      views: 45,
+      views: 60,
       time: '1시간 전',
-      thumbnail: null,
-      solved: false,
+      thumbnail: 'https://via.placeholder.com/200x120',
+      author: {
+        name: 'jnubugo',
+        profile: 'https://cdn.ozcodingschool.com/profiles/user_456.png',
+      },
     },
   ]
+
   return (
     <main className="mx-auto w-full max-w-[960px] px-6 py-8">
       <h1 className="mb-6 text-2xl font-bold text-[var(--color-gray-primary)]">
@@ -40,7 +51,6 @@ export default function MainPage() {
       <section className="mb-6 flex items-center justify-between gap-4">
         <div className="relative flex-1">
           <Search className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-[var(--color-gray-400)]" />
-
           <input
             type="text"
             placeholder="질문 검색"
@@ -72,18 +82,11 @@ export default function MainPage() {
           필터
         </button>
       </section>
-      <section className="mt-6 space-y-4">
+
+      <section className="mt-6 space-y-10">
         {questions.map((q) => (
           <Link key={q.id} to={`/Question/Detail/${q.id}`}>
-            <QuestionCard
-              title={q.title}
-              preview={q.preview}
-              answers={q.answers}
-              views={q.views}
-              time={q.time}
-              thumbnail={q.thumbnail}
-              solved={q.solved}
-            />
+            <QuestionCard {...q} />
           </Link>
         ))}
       </section>
