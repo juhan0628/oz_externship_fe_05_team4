@@ -1,4 +1,4 @@
-import { Search } from 'lucide-react'
+import { Search, SlidersHorizontal } from 'lucide-react'
 import { Link } from 'react-router'
 import { useState } from 'react'
 
@@ -43,6 +43,10 @@ export default function MainPage() {
 
       <section className="mb-4 flex items-center justify-end gap-6 text-sm">
         <SortMenu sort={sort} onChange={setSort} />
+        <button className="flex items-center gap-1 text-sm text-[var(--color-gray-600)] hover:text-[var(--color-gray-primary)]">
+          <SlidersHorizontal className="h-4 w-4" />
+          필터
+        </button>
       </section>
     </main>
   )
