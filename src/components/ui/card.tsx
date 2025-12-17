@@ -1,6 +1,10 @@
+import * as React from 'react'
 import { cn } from '@/lib/utils'
 
-function Card({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export function Card({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       className={cn(
@@ -12,7 +16,7 @@ function Card({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   )
 }
 
-function CardHeader({
+export function CardHeader({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
@@ -21,14 +25,14 @@ function CardHeader({
   )
 }
 
-function CardContent({
+export function CardContent({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
   return <div className={cn('text-gray-primary p-4', className)} {...props} />
 }
 
-function CardFooter({
+export function CardFooter({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
@@ -36,5 +40,3 @@ function CardFooter({
     <div className={cn('border-t border-gray-200 p-4', className)} {...props} />
   )
 }
-
-export { Card, CardHeader, CardContent, CardFooter }
