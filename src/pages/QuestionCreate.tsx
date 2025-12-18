@@ -1,15 +1,15 @@
 import { useState } from 'react'
-import Button from '@/components/common/Button'
-import Card from '@/components/common/Card'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
+import { Button } from '@/components/ui/Button'
+import { Card } from '@/components/ui/Card'
+import { Input } from '@/components/ui/Input'
+import { Textarea } from '@/components/ui/Textarea'
 import {
   Select,
   SelectTrigger,
   SelectValue,
   SelectContent,
   SelectItem,
-} from '@/components/ui/select'
+} from '@/components/ui/Select'
 import { CATEGORY_DATA } from '@/data/Category'
 
 const QuestionCreate = () => {
