@@ -2,11 +2,11 @@ import * as React from 'react'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { cn } from '@/lib/utils'
 
-export const Dialog = DialogPrimitive.Root
-export const DialogTrigger = DialogPrimitive.Trigger
-export const DialogClose = DialogPrimitive.Close
+const Dialog = DialogPrimitive.Root
+const DialogTrigger = DialogPrimitive.Trigger
+const DialogClose = DialogPrimitive.Close
 
-export const DialogOverlay = React.forwardRef<
+const DialogOverlay = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
 >(({ className, ...props }, ref) => (
@@ -18,7 +18,7 @@ export const DialogOverlay = React.forwardRef<
 ))
 DialogOverlay.displayName = 'DialogOverlay'
 
-export const DialogContent = React.forwardRef<
+const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
 >(({ className, ...props }, ref) => (
@@ -36,7 +36,7 @@ export const DialogContent = React.forwardRef<
 ))
 DialogContent.displayName = 'DialogContent'
 
-export function DialogHeader({
+function DialogHeader({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
@@ -51,7 +51,7 @@ export function DialogHeader({
   )
 }
 
-export const DialogTitle = React.forwardRef<
+const DialogTitle = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
 >(({ className, ...props }, ref) => (
@@ -62,3 +62,13 @@ export const DialogTitle = React.forwardRef<
   />
 ))
 DialogTitle.displayName = 'DialogTitle'
+
+export {
+  Dialog,
+  DialogTrigger,
+  DialogClose,
+  DialogOverlay,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+}

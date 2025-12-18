@@ -10,12 +10,12 @@ const sizeMap: Record<AvatarSize, string> = {
   lg: 'h-14 w-14',
 }
 
-export interface AvatarProps
+interface AvatarProps
   extends React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root> {
   size?: AvatarSize
 }
 
-export const Avatar = React.forwardRef<
+const Avatar = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,
   AvatarProps
 >(({ className, size = 'md', ...props }, ref) => (
@@ -31,7 +31,7 @@ export const Avatar = React.forwardRef<
 ))
 Avatar.displayName = 'Avatar'
 
-export const AvatarImage = React.forwardRef<
+const AvatarImage = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Image>,
   React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>
 >(({ className, ...props }, ref) => (
@@ -43,7 +43,7 @@ export const AvatarImage = React.forwardRef<
 ))
 AvatarImage.displayName = 'AvatarImage'
 
-export const AvatarFallback = React.forwardRef<
+const AvatarFallback = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Fallback>,
   React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>
 >(({ className, ...props }, ref) => (
@@ -57,3 +57,5 @@ export const AvatarFallback = React.forwardRef<
   />
 ))
 AvatarFallback.displayName = 'AvatarFallback'
+export { Avatar, AvatarImage, AvatarFallback }
+export type { AvatarProps }
