@@ -4,7 +4,7 @@ import { Button, Card, Textarea } from '../ui'
 
 export default function JaeminCard() {
   return (
-    <div className="mx-auto max-w-5xl px-4 py-8">
+    <div className="px-4 py-8">
       <Card className="my-8">
         <div className="border-gray-200 p-2"></div>
 
