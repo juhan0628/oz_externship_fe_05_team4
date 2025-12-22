@@ -7,7 +7,7 @@ import QuestionCard from '@/components/questions/QuestionCard'
 import profileImg from '@/assets/profile.png'
 import thumnailImg from '@/assets/Rectangle.png'
 import type { CategoryValue } from '@/components/filter'
-import CategoryFilter from '@/components/filter/CategoryFilter'
+import CategoryFilterModal from '@/components/filter/CategoryFilterModal'
 
 export default function MainPage() {
   const [sort, setSort] = useState<'latest' | 'oldest'>('latest')
@@ -97,7 +97,13 @@ export default function MainPage() {
 
       {isFilterOpen && (
         <section className="mt-6">
-          <CategoryFilter value={category} onChange={setCategory} />
+          {isFilterOpen && (
+            <CategoryFilterModal
+              value={category}
+              onApply={setCategory}
+              onClose={() => setIsFilterOpen(false)}
+            />
+          )}
         </section>
       )}
       <section className="mt-8 space-y-6">
