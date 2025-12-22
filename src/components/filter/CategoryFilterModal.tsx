@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { CategoryValue } from '@/components/filter'
 import CategoryFilter from '@/components/filter/CategoryFilter'
 
@@ -14,36 +14,52 @@ export default function CategoryFilterModal({
   onClose,
 }: Props) {
   const [localValue, setLocalValue] = useState<CategoryValue>(value)
+  const [mounted, setMounted] = useState(false)
 
+  useEffect(() => {
+    setMounted(true)
+  }, [])
   return (
     <>
-      <div className="fixed inset-0 z-40 bg-black/40" onClick={onClose} />
+      <div className="fixed inset-0 z-40 bg-black/30" onClick={onClose} />
 
-      <div className="fixed top-[180px] right-[calc(50%-600px)] z-50 w-[420px] rounded-lg bg-white p-6 shadow-lg">
-        <header className="mb-4 text-lg font-bold">필터</header>
-
-        <CategoryFilter value={localValue} onChange={setLocalValue} />
-
-        <footer className="mt-6 flex justify-end gap-2">
+      <div
+        className={`fixed top-[72px] right-0 z-50 flex h-[calc(100vh-96px)] w-[420px] flex-col rounded-l-xl bg-white shadow-xl transition-transform duration-300 ease-out ${mounted ? 'translate-x-0' : 'translate-x-full'} `}
+      >
+        <div className="flex items-center justify-between border-b px-6 py-4">
+          <h2 className="text-lg font-bold">필터</h2>
           <button
-            className="rounded-md border px-4 py-2 text-sm"
+            onClick={onClose}
+            className="text-gray-400 hover:text-gray-600"
+          >
+            ✕
+          </button>
+        </div>
+
+        <div className="flex-1 overflow-y-auto px-6 py-6">
+          <CategoryFilter value={localValue} onChange={setLocalValue} />
+        </div>
+
+        <div className="flex items-center justify-between border-t px-6 py-4">
+          <button
+            className="text-sm text-gray-500 hover:text-gray-700"
             onClick={() =>
               setLocalValue({ main: null, middle: null, sub: null })
             }
           >
-            초기화
+            선택 초기화
           </button>
 
           <button
-            className="bg-primary rounded-md px-4 py-2 text-sm text-white"
+            className="bg-primary hover:bg-primary-400 rounded-md px-4 py-2 text-sm font-medium text-white"
             onClick={() => {
               onApply(localValue)
               onClose()
             }}
           >
-            적용하기
+            필터 적용하기
           </button>
-        </footer>
+        </div>
       </div>
     </>
   )

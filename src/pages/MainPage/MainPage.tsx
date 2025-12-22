@@ -83,29 +83,25 @@ export default function MainPage() {
         </div>
       </section>
 
-      <section className="mt-6 flex items-center justify-end gap-8 text-sm">
+      <section className="relative mt-6 flex items-center justify-end gap-8 text-sm">
         <SortMenu sort={sort} onChange={setSort} />
 
         <button
-          className="hover:text-gray-primary flex items-center gap-1 text-gray-600"
-          onClick={() => setIsFilterOpen((prev) => !prev)}
+          onClick={() => setIsFilterOpen(true)}
+          className="flex items-center gap-1 text-sm text-gray-700 hover:text-gray-900"
         >
           <SlidersHorizontal className="h-4 w-4" />
           필터
         </button>
+        {isFilterOpen && (
+          <CategoryFilterModal
+            value={category}
+            onApply={setCategory}
+            onClose={() => setIsFilterOpen(false)}
+          />
+        )}
       </section>
 
-      {isFilterOpen && (
-        <section className="mt-6">
-          {isFilterOpen && (
-            <CategoryFilterModal
-              value={category}
-              onApply={setCategory}
-              onClose={() => setIsFilterOpen(false)}
-            />
-          )}
-        </section>
-      )}
       <section className="mt-8 space-y-6">
         {questions.map((q) => (
           <Link key={q.id} to={`/Question/Detail/${q.id}`}>
