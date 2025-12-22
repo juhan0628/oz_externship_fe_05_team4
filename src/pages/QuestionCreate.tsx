@@ -10,7 +10,7 @@ import {
 import { CATEGORY_DATA } from '@/data/Category'
 import StarterKit from '@tiptap/starter-kit'
 import { useEditor } from '@tiptap/react'
-import { MenuBar } from '@/components/texteditor'
+import { MenuBar, TextEditor } from '@/components/texteditor'
 
 const QuestionCreate = () => {
   const [mainCategory, setMainCategory] = useState<string>()
@@ -97,6 +97,19 @@ const QuestionCreate = () => {
         <Card className="h-[80px] border-b">
           <MenuBar editor={editor} />
         </Card>
+        <div className="flex flex-1 overflow-hidden">
+          <div className="w-1/2 overflow-y-auto border-r p-4">
+            <TextEditor editor={editor} />
+          </div>
+          <div className="w-1/2 overflow-y-auto bg-gray-50 p-4">
+            {editor && (
+              <div
+                className="prose max-w-full"
+                dangerouslySetInnerHTML={{ __html: editor.getHTML() }}
+              />
+            )}
+          </div>
+        </div>
       </Card>
 
       <div className="mt-[32px] flex w-full max-w-[944px] justify-end">
