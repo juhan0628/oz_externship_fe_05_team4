@@ -133,4 +133,7 @@
   body {
     @apply bg-background text-foreground;
   }
+  .ProseMirror {
+    @apply min-h-[150px] cursor-text text-sm leading-6 outline-none;
+  }
 }

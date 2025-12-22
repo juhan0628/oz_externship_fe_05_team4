@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, Card, Input, Textarea } from '@/components/ui'
+import { Button, Card, Input } from '@/components/ui'
 import {
   Select,
   SelectTrigger,
@@ -8,11 +8,18 @@ import {
   SelectItem,
 } from '@/components/ui/Select'
 import { CATEGORY_DATA } from '@/data/Category'
+import StarterKit from '@tiptap/starter-kit'
+import { useEditor } from '@tiptap/react'
+import { MenuBar } from '@/components/texteditor'
 
 const QuestionCreate = () => {
   const [mainCategory, setMainCategory] = useState<string>()
   const [middleCategory, setMiddleCategory] = useState<string>()
   const [subCategory, setSubCategory] = useState<string>()
+  const editor = useEditor({
+    extensions: [StarterKit],
+    content: '',
+  })
 
   const mainOptions = CATEGORY_DATA
 
@@ -87,23 +94,9 @@ const QuestionCreate = () => {
       </Card>
 
       <Card className="mt-5 flex min-h-[677px] w-full max-w-[944px] flex-col rounded-[20px]">
-        <Card className="h-[80px] border-b">에디터 메뉴바</Card>
-
-        <div className="flex flex-1">
-          <Card className="flex flex-1 flex-col rounded-none border-r p-4">
-            <Textarea
-              className="flex-1 resize-none border-0 p-3 focus:ring-0"
-              placeholder="내용을 입력해주세요"
-            />
-          </Card>
-
-          <Card className="flex flex-1 flex-col rounded-none bg-[#FAFAFB] p-4">
-            <Textarea
-              className="flex-1 resize-none border-0 bg-transparent p-3 focus:ring-0"
-              placeholder="내용을 입력해주세요"
-            />
-          </Card>
-        </div>
+        <Card className="h-[80px] border-b">
+          <MenuBar editor={editor} />
+        </Card>
       </Card>
 
       <div className="mt-[32px] flex w-full max-w-[944px] justify-end">
