@@ -8,7 +8,7 @@ import profileImg from '@/assets/profile.png'
 import thumnailImg from '@/assets/Rectangle.png'
 import type { CategoryValue } from '@/components/filter'
 import CategoryFilterModal from '@/components/filter/CategoryFilterModal'
-import { ChatbotLayout } from '@/components/chatbot'
+import ChatbotFloatingButton from '@/components/chatbot/ChatbotFloatingButton'
 
 export default function MainPage() {
   const [sort, setSort] = useState<'latest' | 'oldest'>('latest')
@@ -102,7 +102,7 @@ export default function MainPage() {
           />
         )}
       </section>
-
+      <ChatbotFloatingButton />
       <section className="mt-8 space-y-6">
         {questions.map((q) => (
           <Link key={q.id} to={`/Question/Detail/${q.id}`}>
@@ -110,7 +110,6 @@ export default function MainPage() {
           </Link>
         ))}
       </section>
-      <ChatbotLayout />
     </main>
   )
 }

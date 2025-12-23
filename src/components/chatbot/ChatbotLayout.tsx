@@ -20,17 +20,19 @@ export default function ChatbotLayout() {
   }
 
   return (
-    <div className="fixed right-6 bottom-6 z-50 w-[360px] overflow-hidden rounded-xl bg-white shadow-xl">
+    <div className="fixed right-6 bottom-24 z-40 flex h-[560px] w-[360px] flex-col overflow-hidden rounded-2xl bg-white shadow-2xl">
       {/* Header */}
-      <div className="bg-primary px-4 py-3 font-semibold text-white">AI OZ</div>
+      <div className="bg-primary flex h-14 shrink-0 items-center justify-center font-semibold text-white">
+        AI OZ
+      </div>
 
       {/* Messages */}
-      <div className="h-[420px] overflow-y-auto p-4">
+      <div className="flex-1 overflow-y-auto px-4 pt-4">
         <ChatMessageList messages={messages} />
       </div>
 
       {/* Input */}
-      <div className="border-t p-3">
+      <div className="shrink-0 border-t bg-white p-3">
         <ChatInput onSend={handleSend} />
       </div>
     </div>
