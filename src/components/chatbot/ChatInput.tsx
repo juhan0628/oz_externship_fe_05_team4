@@ -29,9 +29,9 @@ export default function ChatInput({ onSend }: Props) {
 
         <button
           onClick={handleSend}
-          className="text-primary disabled:text-gray-300"
           disabled={!value.trim()}
-          aria-label="send message"
+          className="text-primary disabled:text-gray-300"
+          aria-label="send"
         >
           <Send size={18} />
         </button>
