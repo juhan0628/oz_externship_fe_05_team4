@@ -8,24 +8,34 @@ interface Props {
 export default function ChatInput({ onSend }: Props) {
   const [value, setValue] = useState('')
 
+  const handleSend = () => {
+    if (!value.trim()) return
+    onSend(value)
+    setValue('')
+  }
+
   return (
-    <div className="flex items-center gap-2">
-      <input
+    <div className="rounded-xl border bg-gray-50 p-3">
+      <textarea
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder="더 궁금한 것이 있다면 이어서 질문해 보세요."
-        className="flex-1 rounded-md border px-3 py-2 text-sm"
+        rows={2}
+        className="w-full resize-none bg-transparent text-sm outline-none placeholder:text-gray-400"
       />
-      <button
-        onClick={() => {
-          if (!value.trim()) return
-          onSend(value)
-          setValue('')
-        }}
-        className="text-primary"
-      >
-        <Send size={18} />
-      </button>
+
+      <div className="mt-2 flex items-center justify-between">
+        <span className="text-xs text-gray-400">{value.length}/1000</span>
+
+        <button
+          onClick={handleSend}
+          className="text-primary disabled:text-gray-300"
+          disabled={!value.trim()}
+          aria-label="send message"
+        >
+          <Send size={18} />
+        </button>
+      </div>
     </div>
   )
 }
