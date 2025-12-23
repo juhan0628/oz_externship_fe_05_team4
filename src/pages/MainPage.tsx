@@ -8,6 +8,7 @@ import profileImg from '@/assets/profile.png'
 import thumnailImg from '@/assets/Rectangle.png'
 import type { CategoryValue } from '@/components/filter'
 import CategoryFilterModal from '@/components/filter/CategoryFilterModal'
+import { ChatbotLayout } from '@/components/chatbot'
 
 export default function MainPage() {
   const [sort, setSort] = useState<'latest' | 'oldest'>('latest')
@@ -109,6 +110,7 @@ export default function MainPage() {
           </Link>
         ))}
       </section>
+      <ChatbotLayout />
     </main>
   )
 }
