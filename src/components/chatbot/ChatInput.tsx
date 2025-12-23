@@ -1,31 +1,30 @@
 import { useState } from 'react'
+import { Send } from 'lucide-react'
 
 interface Props {
-  onSend: (text: string) => void
+  onSend: (message: string) => void
 }
 
 export default function ChatInput({ onSend }: Props) {
   const [value, setValue] = useState('')
 
-  const handleSubmit = () => {
-    if (!value.trim()) return
-    onSend(value)
-    setValue('')
-  }
-
   return (
-    <div className="flex gap-2">
+    <div className="flex items-center gap-2">
       <input
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        placeholder="더 궁금한 것이 있다면 입력해 보세요."
-        className="flex-1 rounded-md border px-3 py-2 text-sm outline-none"
+        placeholder="더 궁금한 것이 있다면 이어서 질문해 보세요."
+        className="flex-1 rounded-md border px-3 py-2 text-sm"
       />
       <button
-        onClick={handleSubmit}
-        className="bg-primary rounded-md px-3 text-sm text-white"
+        onClick={() => {
+          if (!value.trim()) return
+          onSend(value)
+          setValue('')
+        }}
+        className="text-primary"
       >
-        전송
+        <Send size={18} />
       </button>
     </div>
   )

@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import ChatMessageList from './ChatMessageList'
 import ChatInput from './ChatInput'
-import type { Message } from '@/types'
+import type { ChatMessageType } from '@/types'
 
 export default function ChatbotLayout() {
-  const [messages, setMessages] = useState<Message[]>([
+  const [messages, setMessages] = useState<ChatMessageType[]>([
     {
       id: 1,
       role: 'ai',
@@ -15,20 +15,14 @@ export default function ChatbotLayout() {
   const handleSend = (text: string) => {
     setMessages((prev) => [
       ...prev,
-      {
-        id: Date.now(),
-        role: 'user',
-        content: text,
-      },
+      { id: Date.now(), role: 'user', content: text },
     ])
   }
 
   return (
     <div className="fixed right-6 bottom-6 z-50 w-[360px] overflow-hidden rounded-xl bg-white shadow-xl">
       {/* Header */}
-      <div className="bg-primary flex h-14 items-center justify-center font-semibold text-white">
-        AI OZ
-      </div>
+      <div className="bg-primary px-4 py-3 font-semibold text-white">AI OZ</div>
 
       {/* Messages */}
       <div className="h-[420px] overflow-y-auto p-4">

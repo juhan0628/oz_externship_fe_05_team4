@@ -1,15 +1,15 @@
 import ChatMessage from './ChatMessage'
-import type { Message } from '@/types'
+import type { ChatMessageType } from '@/types'
 
 interface Props {
-  messages: Message[]
+  messages: ChatMessageType[]
 }
 
 export default function ChatMessageList({ messages }: Props) {
   return (
     <div className="space-y-3">
       {messages.map((msg) => (
-        <ChatMessage key={msg.id} role={msg.role} content={msg.content} />
+        <ChatMessage key={msg.id} {...msg} />
       ))}
     </div>
   )
