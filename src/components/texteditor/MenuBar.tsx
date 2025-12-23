@@ -10,15 +10,15 @@ const MenuBar = ({ editor }: MenuBarProps) => {
   return (
     <div className="editor-toolbar">
       <button
-        onClick={() => editor.chain().focus().toggleBold().run()}
-        className={editor.isActive('bold') ? 'active' : ''}
+        onClick={() => editor?.chain().focus().toggleBold().run()}
+        className="rounded-md border border-gray-300 bg-white px-3 py-1 hover:bg-gray-100"
       >
         B
       </button>
 
       <button
-        onClick={() => editor.chain().focus().toggleItalic().run()}
-        className={editor.isActive('italic') ? 'active' : ''}
+        onClick={() => editor?.chain().focus().toggleItalic().run()}
+        className="rounded-md border border-gray-300 bg-white px-3 py-1 hover:bg-gray-100"
       >
         I
       </button>

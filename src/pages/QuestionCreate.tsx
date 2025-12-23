@@ -16,9 +16,14 @@ const QuestionCreate = () => {
   const [mainCategory, setMainCategory] = useState<string>()
   const [middleCategory, setMiddleCategory] = useState<string>()
   const [subCategory, setSubCategory] = useState<string>()
+  const [content, setContent] = useState('')
+
   const editor = useEditor({
     extensions: [StarterKit],
     content: '',
+    onUpdate: ({ editor }) => {
+      setContent(editor.getHTML())
+    },
   })
 
   const mainOptions = CATEGORY_DATA
