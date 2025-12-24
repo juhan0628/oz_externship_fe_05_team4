@@ -94,24 +94,26 @@ const QuestionCreate = () => {
       </Card>
 
       {/* 에디터 */}
-      <Card className="mt-5 flex min-h-[677px] w-full max-w-[944px] flex-col rounded-[20px]">
-        <Card className="h-[80px] border-b">
-          <MenuBar editor={editor} />
-        </Card>
-
-        <div className="flex flex-1 overflow-hidden">
-          <div className="w-1/2 overflow-y-auto border-r p-4">
-            <TextEditor editor={editor} />
+      <div className="mt-5 w-full max-w-[944px] rounded-[20px] bg-[#CECECE] p-[1px]">
+        <div className="flex min-h-[677px] flex-col overflow-hidden rounded-[20px] bg-white">
+          <div className="border-b border-[#CECECE] bg-white">
+            <MenuBar editor={editor} />
           </div>
 
-          <div className="w-1/2 overflow-y-auto bg-gray-50 p-4">
-            <div
-              className="preview"
-              dangerouslySetInnerHTML={{ __html: content }}
-            />
+          <div className="flex flex-1">
+            <div className="w-1/2 overflow-y-auto border-r border-[#CECECE] p-4">
+              <TextEditor editor={editor} />
+            </div>
+
+            <div className="w-1/2 overflow-y-auto bg-gray-50 p-4">
+              <div
+                className="preview"
+                dangerouslySetInnerHTML={{ __html: content }}
+              />
+            </div>
           </div>
         </div>
-      </Card>
+      </div>
 
       <div className="mt-[32px] flex w-full max-w-[944px] justify-end">
         <Button>등록하기</Button>
