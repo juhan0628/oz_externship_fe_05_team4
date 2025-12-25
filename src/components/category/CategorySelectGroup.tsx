@@ -6,12 +6,12 @@ import {
   SelectItem,
 } from '@/components/ui/Select'
 
-type Option = {
+interface Option {
   id: number | string
   name: string
 }
 
-type Props = {
+interface Props {
   placeholder: string
   options: Option[]
   value: string
