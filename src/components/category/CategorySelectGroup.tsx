@@ -7,28 +7,37 @@ import {
 } from '@/components/ui/Select'
 
 type Option = {
-  id: string | number
+  id: number | string
   name: string
 }
 
-type CategorySelectProps = {
+type Props = {
   placeholder: string
   options: Option[]
-  value?: string
+  value: string
   onChange: (value: string) => void
   disabled?: boolean
 }
 
-const CategorySelect = ({
+const CategorySelectGroup = ({
   placeholder,
   options,
   value,
   onChange,
-  disabled,
-}: CategorySelectProps) => {
+  disabled = false,
+}: Props) => {
+  const isInactive = disabled || value === ''
+
   return (
     <Select value={value} onValueChange={onChange} disabled={disabled}>
-      <SelectTrigger>
+      <SelectTrigger
+        className={[
+          'h-10 w-full rounded-md border px-3 text-sm',
+          isInactive
+            ? 'bg-[#ECECEC] text-[#BDBDBD]'
+            : 'bg-[#FAFAFA] text-[#121212]',
+        ].join(' ')}
+      >
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
 
@@ -43,4 +52,4 @@ const CategorySelect = ({
   )
 }
 
-export default CategorySelect
+export default CategorySelectGroup
