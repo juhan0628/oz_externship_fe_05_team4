@@ -2,7 +2,8 @@ import { useMemo, useState } from 'react'
 import { Button, Card, Input } from '@/components/ui'
 import { CATEGORY_DATA } from '@/data/Category'
 import CategorySelectGroup from '@/components/category/CategorySelectGroup'
-import { MenuBar, TextEditor, useTextEditor } from '@/components/texteditor'
+import { MenuBar, TextEditor } from '@/components/texteditor'
+import { useTextEditor } from '@/hooks'
 
 const QuestionCreate = () => {
   const [content, setContent] = useState('')
