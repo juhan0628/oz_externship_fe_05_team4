@@ -1,13 +1,13 @@
 export interface QuestionCreate {
   title: string
   content: string
-  category: bigint
+  category: number
   image_urls: string[]
 }
 
 export interface QuestionCreateResponse {
   message: string
-  question_id: bigint
+  question_id: number
 }
 
 export interface QuestionCreateErrorResponse {
