@@ -1,3 +1,5 @@
+import { cn } from '@/lib/utils'
+
 interface QuestionCardProps {
   id: number
   categories: string[]
@@ -24,7 +26,7 @@ export default function QuestionCard({
   author,
 }: QuestionCardProps) {
   return (
-    <article className="flex w-full cursor-pointer justify-between border-b border-gray-200 py-5">
+    <article className="flex w-full cursor-pointer justify-between border-b border-gray-200 py-5 transition-colors hover:bg-gray-50">
       <div className="flex-1 pr-8">
         <div className="mb-2 flex flex-wrap items-center gap-1 text-[13px] text-gray-500">
           {categories.map((category, index) => {
@@ -54,9 +56,20 @@ export default function QuestionCard({
 
         <div className="mt-3 flex items-center gap-4 text-[12px] text-gray-500">
           <div className="flex items-center gap-1">
-            <span className="flex h-4 w-4 items-center justify-center rounded-full bg-[var(--color-success)] text-[10px] font-bold text-white">
-              A
-            </span>
+            <div className="flex items-center gap-1">
+              <span
+                className={cn(
+                  'flex h-4 w-4 items-center justify-center rounded-full text-[10px] font-bold text-white transition-colors',
+                  answers > 0
+                    ? 'bg-green-500 hover:bg-green-600'
+                    : 'bg-gray-300'
+                )}
+              >
+                A
+              </span>
+              <span>답변 {answers}</span>
+            </div>
+
             <span>답변 {answers}</span>
           </div>
 
