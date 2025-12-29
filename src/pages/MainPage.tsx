@@ -22,6 +22,7 @@ export default function MainPage() {
   const [tab, setTab] = useState<QuestionTabValue>('all')
   const [page, setPage] = useState(1)
   const [isFilterOpen, setIsFilterOpen] = useState(false)
+  const [search, setSearch] = useState('')
   const [category, setCategory] = useState<CategoryValue>({
     main: null,
     middle: null,
@@ -65,11 +66,25 @@ export default function MainPage() {
     []
   )
   //필터링된 질문 목록
+  // 3️⃣ 검색 + 탭 필터 로직
   const filteredQuestions = useMemo(() => {
-    if (tab === 'answered') return questions.filter((q) => q.answers > 0)
-    if (tab === 'waiting') return questions.filter((q) => q.answers === 0)
-    return questions
-  }, [tab, questions])
+    const byTab =
+      tab === 'answered'
+        ? questions.filter((q) => q.answers > 0)
+        : tab === 'waiting'
+          ? questions.filter((q) => q.answers === 0)
+          : questions
+
+    if (!search.trim()) return byTab
+
+    const keyword = search.toLowerCase()
+
+    return byTab.filter(
+      (q) =>
+        q.title.toLowerCase().includes(keyword) ||
+        q.preview.toLowerCase().includes(keyword)
+    )
+  }, [tab, questions, search])
 
   //총 페이지 수
   const totalPages = Math.max(
@@ -97,6 +112,8 @@ export default function MainPage() {
           <input
             type="text"
             placeholder="질문 검색"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             className="h-12 w-full rounded-full border border-gray-200 bg-gray-100 pr-5 pl-12 text-sm outline-none"
           />
         </div>
