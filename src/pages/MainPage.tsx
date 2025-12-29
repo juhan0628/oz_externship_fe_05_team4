@@ -14,6 +14,7 @@ import QuestionPagination from '@/components/questions/QuestionPagination'
 import profileImg from '@/assets/profile.png'
 import thumnailImg from '@/assets/Rectangle.png'
 import type { CategoryValue } from '@/components/filter'
+import { cn } from '@/lib/utils'
 
 const PAGE_SIZE = 5
 
@@ -110,15 +111,32 @@ export default function MainPage() {
       <h1 className="text-gray-primary pt-8 text-2xl font-bold">질의응답</h1>
 
       <section className="mt-6 flex items-center">
-        <div className="relative w-[720px]">
-          <Search className="absolute top-1/2 left-5 h-5 w-5 -translate-y-1/2 text-gray-400" />
+        <div
+          className={cn(
+            'relative flex h-[56px] w-[720px] items-center rounded-full border-2 bg-white transition',
+            search
+              ? 'border-primary'
+              : 'focus-within:border-primary border-gray-200'
+          )}
+        >
+          <Search className="ml-6 h-5 w-5 text-gray-400" />
+
           <input
-            type="text"
-            placeholder="질문 검색"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="h-12 w-full rounded-full border border-gray-200 bg-gray-100 pr-5 pl-12 text-sm outline-none"
+            placeholder="질문 검색"
+            className="flex-1 bg-transparent px-4 text-[15px] text-gray-900 outline-none placeholder:text-gray-400"
           />
+
+          {search && (
+            <button
+              onClick={() => setSearch('')}
+              className="mr-4 flex h-8 w-8 items-center justify-center rounded-full bg-gray-300 text-white hover:bg-gray-400"
+              aria-label="clear search"
+            >
+              ✕
+            </button>
+          )}
         </div>
 
         <Link to="/Question/Create" className="ml-auto">
