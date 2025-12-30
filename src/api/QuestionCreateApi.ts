@@ -11,7 +11,7 @@ export const QuestionCreateApi = async (
   token: string
 ): Promise<QuestionCreateResponse> => {
   const res = await api.post(
-    '/QuestionCreate',
+    '/questions',
     {
       title: payload.title,
       content: payload.content,

@@ -85,7 +85,7 @@ const QuestionCreate = () => {
       title,
       content,
       category: categoryId,
-      image_urls: [],
+      imageUrls: [],
     })
   }
 
