@@ -2,12 +2,12 @@ export interface QuestionCreate {
   title: string
   content: string
   category: number
-  image_urls: string[]
+  imageUrls: string[]
 }
 
 export interface QuestionCreateResponse {
   message: string
-  question_id: number
+  questionId: number
 }
 
 export interface QuestionCreateErrorResponse {

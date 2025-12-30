@@ -10,9 +10,14 @@ export const QuestionCreateApi = async (
   payload: QuestionCreate,
   token: string
 ): Promise<QuestionCreateResponse> => {
-  const res = await api.post<QuestionCreateResponse>(
-    '/api/v1/qna/questions',
-    payload,
+  const res = await api.post(
+    '/QuestionCreate',
+    {
+      title: payload.title,
+      content: payload.content,
+      category: payload.category,
+      image_urls: payload.imageUrls,
+    },
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -20,5 +25,8 @@ export const QuestionCreateApi = async (
     }
   )
 
-  return res.data
+  return {
+    message: res.data.message,
+    questionId: res.data.question_id,
+  }
 }
