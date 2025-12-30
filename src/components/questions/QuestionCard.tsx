@@ -10,10 +10,10 @@ interface QuestionCardProps {
   answers: number
   views: number
   time: string
-  thumbnail?: string | null
+  thumbnail?: string
   author: {
     name: string
-    profile: string
+    profile: string | null
   }
   searchKeyword?: string
 }

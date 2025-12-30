@@ -1,12 +1,18 @@
-import axios from 'axios'
-import type { QnaListResponse } from '@/types/question'
+import { api } from './api'
+import type { QnaListResponse } from '@/types'
 
-const BASE_URL = 'https://api.ozcodingschool.site'
+interface GetQuestionsParams {
+  page?: number
+}
 
-export async function fetchQnaQuestions(): Promise<QnaListResponse> {
-  const res = await axios.get<QnaListResponse>(
-    `${BASE_URL}/api/v1/qna/questions`
-  )
+export const getQuestions = async (
+  params: GetQuestionsParams = {}
+): Promise<QnaListResponse> => {
+  const { page = 1 } = params
 
-  return res.data
+  const { data } = await api.get<QnaListResponse>('/questions', {
+    params: { page },
+  })
+
+  return data
 }

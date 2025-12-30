@@ -1,16 +1,19 @@
-import { fetchQnaQuestions } from '@/api/questions.api'
-import { mapQnaQuestionToUI } from '@/utils/mapQuestion'
 import { useQuery } from '@tanstack/react-query'
-export function useQuestions() {
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ['qna-questions'], // 옵션 없는 기본 상태
-    queryFn: fetchQnaQuestions,
+import { getQuestions } from '@/api/questions.api'
+import { mapQuestion } from '@/utils/mapQuestion'
+
+const PAGE_SIZE = 10
+
+export function useQuestions(page: number) {
+  const query = useQuery({
+    queryKey: ['questions', page],
+    queryFn: () => getQuestions({ page }),
   })
 
   return {
-    questions: data ? data.results.map(mapQnaQuestionToUI) : [],
-    isLoading,
-    isError,
-    totalPages: 1, // 아직 서버 pagination 안 쓰므로 고정
+    questions: query.data ? query.data.results.map(mapQuestion) : [],
+    totalPages: query.data ? Math.ceil(query.data.count / PAGE_SIZE) : 0,
+    isLoading: query.isLoading,
+    isError: query.isError,
   }
 }

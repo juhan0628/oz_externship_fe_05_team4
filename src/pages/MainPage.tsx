@@ -39,7 +39,7 @@ export default function MainPage() {
   )
 
   /*데이터*/
-  const { questions, totalPages } = useQuestions()
+  const { questions, totalPages } = useQuestions(page)
 
   /*렌더*/
   return (
