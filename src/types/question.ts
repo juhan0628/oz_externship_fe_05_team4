@@ -27,3 +27,20 @@ export interface QnaListResponse {
   previous: string | null
   results: QnaQuestion[]
 }
+
+export interface Question {
+  id: number
+  categories: string[]
+  title: string
+  preview: string
+  answers: number
+  views: number
+  time: string
+  thumbnail: string | null
+  author: {
+    name: string
+    profile: string
+  }
+}
+
+export type QuestionTab = 'all' | 'answered' | 'waiting'
