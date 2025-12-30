@@ -9,10 +9,12 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu'
 import profileImg from '@/assets/profile.png'
+import Login from '@/components/login/Login'
+import { useAuthStore } from '@/store/index'
 
 export default function Header() {
-  //Zustand로 대체 예정
-  const isLoggedIn = false
+  // 로그인 여부 확인은 이렇게 사용하시면 좋아요!
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated())
 
   return (
     <header className="flex w-full flex-col">
@@ -37,8 +39,9 @@ export default function Header() {
         </div>
 
         {/* RIGHT */}
-        {!isLoggedIn ? (
+        {!isAuthenticated ? (
           <div className="flex items-center gap-3 text-sm">
+            <Login />
             <Link to="/login" className="hover:text-black">
               로그인
             </Link>
