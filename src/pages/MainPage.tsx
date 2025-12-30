@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Link } from 'react-router'
 import { Pencil, SlidersHorizontal } from 'lucide-react'
 
@@ -14,29 +13,40 @@ import ChatbotFloatingButton from '@/components/chatbot/ChatbotFloatingButton'
 
 import type { CategoryValue } from '@/components/filter'
 import { useQuestions } from '@/hooks/useQuestions'
+import { useSessionState } from '@/hooks/useSessionState'
 
 export default function MainPage() {
-  const [tab, setTab] = useState<QuestionTabValue>('all')
-  const [search, setSearch] = useState('')
-  const [sort, setSort] = useState<'latest' | 'oldest'>('latest')
+  const [tab, setTab] = useSessionState<QuestionTabValue>('qna-tab', 'all')
+  const [search, setSearch] = useSessionState('qna-search', '')
+  const [sort, setSort] = useSessionState<'latest' | 'oldest'>(
+    'qna-sort',
+    'latest'
+  )
+  const [page, setPage] = useSessionState<number>('qna-page', 1)
 
-  const [isFilterOpen, setIsFilterOpen] = useState(false)
-  const [category, setCategory] = useState<CategoryValue>({
-    main: null,
-    middle: null,
-    sub: null,
-  })
+  const [isFilterOpen, setIsFilterOpen] = useSessionState(
+    'qna-filter-open',
+    false
+  )
+
+  const [category, setCategory] = useSessionState<CategoryValue>(
+    'qna-category',
+    {
+      main: null,
+      middle: null,
+      sub: null,
+    }
+  )
 
   /*데이터*/
-  const { questions, page, setPage, totalPages } = useQuestions(tab, search)
+  const { questions, totalPages } = useQuestions(tab, search)
 
-  /* 렌더*/
+  /*렌더*/
   return (
     <main className="mx-auto w-full max-w-[1200px] px-6">
-      {/* 타이틀*/}
       <h1 className="pt-8 text-2xl font-bold text-gray-900">질의응답</h1>
 
-      {/*  검색 + 질문하기  */}
+      {/*검색 + 질문하기*/}
       <section className="mt-6 flex items-center gap-4">
         <SearchBar value={search} onChange={setSearch} />
 
@@ -48,7 +58,7 @@ export default function MainPage() {
         </Link>
       </section>
 
-      {/*상태 탭*/}
+      {/*탭*/}
       <section className="mt-10 border-b border-gray-200">
         <QuestionStatusTabs value={tab} onChange={setTab} />
       </section>
@@ -97,8 +107,6 @@ export default function MainPage() {
           onChange={setPage}
         />
       </section>
-
-      {/* 챗봇 */}
       <ChatbotFloatingButton />
     </main>
   )
