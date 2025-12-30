@@ -13,7 +13,7 @@ export function useQuestionFilter(
     const byTab =
       tab === 'answered'
         ? questions.filter((q) => q.answers > 0)
-        : tab === 'waiting'
+        : tab === 'unanswered'
           ? questions.filter((q) => q.answers === 0)
           : questions
 
