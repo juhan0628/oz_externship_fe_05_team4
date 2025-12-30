@@ -1,7 +1,13 @@
 import './App.css'
 import Header from '@/components/common/Header'
 import { BrowserRouter, Routes, Route } from 'react-router'
-import { MainPage, NotFound, DetailPage, CreatePage } from '@/pages'
+import {
+  MainPage,
+  NotFound,
+  DetailPage,
+  CreatePage,
+  QuestionEditPage,
+} from '@/pages'
 
 function App() {
   return (
@@ -13,6 +19,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
         <Route path="/Question/Detail/:id" element={<DetailPage />} />
         <Route path="/Question/Create" element={<CreatePage />} />
+        <Route path="/Question/Edit" element={<QuestionEditPage />} />
       </Routes>
     </BrowserRouter>
   )
