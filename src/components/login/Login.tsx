@@ -7,23 +7,28 @@ import {
 } from '@/components/ui/Select'
 import { Button } from '../ui'
 import { useState } from 'react'
-import { logIn } from '@/api/auth'
+import { logIn } from '@/api/auth.api'
+import { useMutation } from '@tanstack/react-query'
 
 const Login = () => {
   const [selectedNum, setSelectedNum] = useState<string>('')
   const numArr = Array.from({ length: 10 }, (_, index) => index + 1)
 
+  const { mutate } = useMutation({
+    mutationFn: logIn,
+    onSuccess: (data) => {
+      console.log(data)
+    },
+    onError: (error) => {
+      console.error('로그인 실패', error)
+    },
+  })
+
   const handleLogin = () => {
-    logIn({
+    mutate({
       email: `testuser${selectedNum}@ozcodingschool.site`,
       password: 'Ozcoding1234@',
     })
-      .then((data) => {
-        console.log(data)
-      })
-      .catch((error) => {
-        console.error('로그인 실패', error)
-      })
   }
 
   return (
