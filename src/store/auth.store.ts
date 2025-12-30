@@ -2,16 +2,19 @@ import type { User } from '@/types/user'
 import { create } from 'zustand'
 
 interface AuthState {
-  status: 'loading' | 'authenticated' | 'unauthenticated'
+  status: 'idle' | 'authenticated' | 'unauthenticated'
   user: User | null
 
   setAuthenticated: (user: User) => void
   setUnauthenticated: () => void
-  setLoading: () => void
+
+  isAuthenticated: () => boolean
+  isUnauthenticated: () => boolean
+  isIdle: () => boolean
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
-  status: 'loading',
+export const useAuthStore = create<AuthState>((set, get) => ({
+  status: 'idle',
   user: null,
 
   setAuthenticated: (user) =>
@@ -26,8 +29,9 @@ export const useAuthStore = create<AuthState>((set) => ({
       user: null,
     }),
 
-  setLoading: () =>
-    set({
-      status: 'loading',
-    }),
+  isAuthenticated: () => get().status === 'authenticated',
+
+  isUnauthenticated: () => get().status === 'unauthenticated',
+
+  isIdle: () => get().status === 'idle',
 }))
