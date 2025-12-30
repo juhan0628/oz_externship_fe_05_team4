@@ -4,9 +4,15 @@ import { CATEGORY_DATA } from '@/data/Category'
 import CategorySelectGroup from '@/components/category/CategorySelectGroup'
 import { MenuBar, TextEditor } from '@/components/texteditor'
 import { useTextEditor } from '@/hooks'
+import { useAuthStore } from '@/store'
+import { useQuestionCreate } from '@/hooks/useQuestionCreate'
 
 const QuestionCreate = () => {
   const [content, setContent] = useState('')
+  const [title, setTitle] = useState('')
+
+  const token = useAuthStore((state) => state.token)
+  const { mutate, isPending } = useQuestionCreate(token ?? '')
 
   const editor = useTextEditor({
     content: '',
@@ -44,6 +50,45 @@ const QuestionCreate = () => {
     setSubCategory('')
   }
 
+  const getSelectedCategoryId = () => {
+    if (!mainCategory || !middleCategory || !subCategory) return null
+
+    const main = CATEGORY_DATA.find((c) => c.name === mainCategory)
+    const middle = main?.subCategories.find((c) => c.name === middleCategory)
+    const sub = middle?.items.find((c) => c.name === subCategory)
+    if (!sub) return null
+
+    return Number(sub.id)
+  }
+
+  const handleSubmit = () => {
+    const categoryId = getSelectedCategoryId()
+
+    if (!token) {
+      alert('로그인이 필요합니다.')
+      return
+    }
+
+    if (!title.trim()) {
+      alert('제목을 입력해주세요.')
+      return
+    }
+    if (!categoryId) {
+      alert('카테고리를 선택해주세요.')
+      return
+    }
+    if (!content.trim()) {
+      alert('내용을 입력해주세요.')
+      return
+    }
+    mutate({
+      title,
+      content,
+      category: categoryId,
+      imageUrls: [],
+    })
+  }
+
   return (
     <div className="mx-auto flex w-full max-w-[944px] flex-col px-[24px] py-10">
       <h1 className="mb-2 text-2xl font-bold">질문 작성하기</h1>
@@ -79,6 +124,8 @@ const QuestionCreate = () => {
         </div>
 
         <Input
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
           className="h-[60px] w-full rounded-[4px] border border-[#ECECEC] bg-[#F7F2FF] px-[16px] py-[10px]"
           placeholder="제목을 입력하세요"
         />
@@ -106,7 +153,9 @@ const QuestionCreate = () => {
       </div>
 
       <div className="mt-[32px] flex w-full justify-end">
-        <Button>등록하기</Button>
+        <Button onClick={handleSubmit} disabled={isPending}>
+          {isPending ? '등록 중..' : '등록하기'}
+        </Button>
       </div>
     </div>
   )
