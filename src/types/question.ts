@@ -43,4 +43,4 @@ export interface Question {
   }
 }
 
-export type QuestionTab = 'all' | 'answered' | 'waiting'
+export type QuestionTab = 'all' | 'answered' | 'unanswered'

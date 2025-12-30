@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils'
 import { highlightText } from '@/lib/highlight'
+import defaultProfileImg from '@/assets/profile.png'
 
 interface QuestionCardProps {
   id: number
@@ -76,8 +77,8 @@ export default function QuestionCard({
 
           <div className="ml-auto flex items-center gap-2">
             <img
-              src={author.profile}
-              alt={`${author.name} 프로필`}
+              src={author.profile || defaultProfileImg}
+              alt={author.name}
               className="h-6 w-6 rounded-full object-cover"
             />
             <span>{author.name}</span>
