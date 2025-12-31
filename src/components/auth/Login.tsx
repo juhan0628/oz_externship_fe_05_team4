@@ -5,9 +5,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/Select'
-import { Button } from '../ui'
+import Button from '@/components/ui/Button'
 import { useState } from 'react'
-import { useLogin } from '@/hooks/useLogin'
+import { useLogin } from '@/hooks/index'
 
 const Login = () => {
   const [selectedNum, setSelectedNum] = useState<string>('')

@@ -1,6 +1,6 @@
-import { api } from './api'
+import { api } from '@/lib/index'
 
 export async function fetchQuestions(query: string) {
-  const res = await api.get(`/api/v1/qna/questions?${query}`)
+  const res = await api.get(`/qna/questions?${query}`)
   return res.data
 }

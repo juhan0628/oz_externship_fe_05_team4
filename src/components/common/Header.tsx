@@ -9,12 +9,20 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu'
 import profileImg from '@/assets/profile.png'
-import Login from '@/components/login/Login'
+import Login from '@/components/auth/Login'
 import { useAuthStore } from '@/store/index'
+import { token } from '@/lib/index'
 
 export default function Header() {
-  // 로그인 여부 확인은 이렇게 사용하시면 좋아요!
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated())
+  const setUnauthenticated = useAuthStore((state) => state.setUnauthenticated)
+
+  const handleLogout = () => {
+    // TODO: 로그아웃 커스텀 훅으로 TanStack 사용해서 싹 분리하기
+    // await logOut()
+    token.clear()
+    setUnauthenticated()
+  }
 
   return (
     <header className="flex w-full flex-col">
@@ -64,7 +72,7 @@ export default function Header() {
               <DropdownMenuSeparator />
               <DropdownMenuItem>프로필</DropdownMenuItem>
               <DropdownMenuItem>설정</DropdownMenuItem>
-              <DropdownMenuItem className="text-red-600">
+              <DropdownMenuItem className="text-red-600" onClick={handleLogout}>
                 로그아웃
               </DropdownMenuItem>
             </DropdownMenuContent>
