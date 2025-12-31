@@ -1,6 +1,18 @@
-import { api } from './api'
+import { api } from '@/lib/index'
+import type { QnaListResponse } from '@/types'
 
-export async function fetchQuestions(query: string) {
-  const res = await api.get(`/api/v1/qna/questions?${query}`)
-  return res.data
+interface GetQuestionsParams {
+  page?: number
+}
+
+export const getQuestions = async (
+  params: GetQuestionsParams = {}
+): Promise<QnaListResponse> => {
+  const { page = 1 } = params
+
+  const { data } = await api.get<QnaListResponse>('/qna/questions', {
+    params: { page },
+  })
+
+  return data
 }
