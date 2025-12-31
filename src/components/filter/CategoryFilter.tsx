@@ -22,53 +22,34 @@ export default function CategoryFilter({ value, onChange }: Props) {
 
   return (
     <div className="space-y-4">
-      {/* 대분류 */}
       <Dropdown
-        label="대분류 선택"
+        placeholder="대분류 선택"
         value={value.main}
         options={mainOptions}
-        onSelect={(v) =>
-          onChange({
-            main: v,
-            middle: null,
-            sub: null,
-          })
-        }
+        onSelect={(v) => onChange({ main: v, middle: null, sub: null })}
       />
 
-      {/* 중분류 */}
       <Dropdown
-        label="중분류 선택"
+        placeholder="중분류 선택"
         value={value.middle}
         options={middleOptions}
         disabled={!value.main}
-        onSelect={(v) =>
-          onChange({
-            ...value,
-            middle: v,
-            sub: null,
-          })
-        }
+        onSelect={(v) => onChange({ ...value, middle: v, sub: null })}
       />
 
-      {/* 소분류 */}
       <Dropdown
-        label="소분류 선택"
+        placeholder="소분류 선택"
         value={value.sub}
         options={subOptions}
         disabled={!value.middle}
-        onSelect={(v) =>
-          onChange({
-            ...value,
-            sub: v,
-          })
-        }
+        onSelect={(v) => onChange({ ...value, sub: v })}
       />
     </div>
   )
 }
+
 interface DropdownProps<T extends { id: number; name: string }> {
-  label: string
+  placeholder: string
   value: T | null
   options: T[]
   disabled?: boolean
@@ -76,7 +57,7 @@ interface DropdownProps<T extends { id: number; name: string }> {
 }
 
 function Dropdown<T extends { id: number; name: string }>({
-  label,
+  placeholder,
   value,
   options,
   disabled,
@@ -85,35 +66,28 @@ function Dropdown<T extends { id: number; name: string }>({
   const [open, setOpen] = useState(false)
 
   return (
-    <div
-      className={cn(
-        'rounded-md border',
-        open ? 'border-primary' : 'border-gray-200',
-        disabled && 'border-gray-200 bg-gray-100'
-      )}
-    >
+    <div className="relative">
       <button
         type="button"
         disabled={disabled}
-        onClick={() => {
-          if (!disabled) setOpen((p) => !p)
-        }}
+        onClick={() => !disabled && setOpen((p) => !p)}
         className={cn(
-          'flex h-12 w-full items-center justify-between px-4 text-sm',
-          open ? 'rounded-t-md' : 'rounded-md',
+          'flex h-12 w-full items-center justify-between rounded-md border px-4 text-sm',
           disabled
-            ? 'cursor-not-allowed text-gray-400'
-            : 'bg-white text-gray-900'
+            ? 'text-gray-disabled border-gray-200 bg-gray-100'
+            : 'text-gray-primary border-gray-300 bg-white'
         )}
       >
         <span className={cn(!value && 'text-gray-400')}>
-          {value?.name ?? label}
+          {value?.name ?? placeholder}
         </span>
-        <ChevronDown className="h-4 w-4" />
+        <ChevronDown
+          className={cn('h-4 w-4 transition-transform', open && 'rotate-180')}
+        />
       </button>
 
       {open && (
-        <ul className="max-h-56 overflow-auto rounded-b-md bg-white">
+        <ul className="absolute z-10 mt-1 max-h-40 w-full overflow-y-auto rounded-md border bg-white shadow">
           {options.map((opt) => {
             const selected = value?.id === opt.id
             return (
