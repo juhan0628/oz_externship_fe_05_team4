@@ -1,7 +1,18 @@
-import type { Question } from '@/types'
-import { QUESTIONS_MOCK } from '@/mocks/questions.mock'
+import { api } from './api'
+import type { QnaListResponse } from '@/types'
 
-export async function fetchQuestions(): Promise<Question[]> {
-  //더미
-  return QUESTIONS_MOCK
+interface GetQuestionsParams {
+  page?: number
+}
+
+export const getQuestions = async (
+  params: GetQuestionsParams = {}
+): Promise<QnaListResponse> => {
+  const { page = 1 } = params
+
+  const { data } = await api.get<QnaListResponse>('/questions', {
+    params: { page },
+  })
+
+  return data
 }
