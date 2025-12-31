@@ -23,6 +23,13 @@ api.interceptors.request.use((config) => {
 })
 
 // 응답 인터셉터
+declare module 'axios' {
+  export interface AxiosRequestConfig {
+    _retry?: boolean
+    _skipAuth?: boolean
+  }
+}
+
 let isRefreshing = false
 let refreshPromise: Promise<string> | null = null
 
@@ -31,8 +38,13 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config
 
-    // 401 에러가 아니거나, 이미 재시도한 경우 오류 반환
-    if (error.response?.status !== 401 || originalRequest._retry) {
+    // 401 에러가 아니거나, 이미 재시도한 경우 또는 인증 정보가 없으면 오류 반환
+    if (
+      error.response?.status !== 401 ||
+      originalRequest._retry ||
+      originalRequest._skipAuth ||
+      !originalRequest.headers?.Authorization
+    ) {
       return Promise.reject(error)
     }
 
@@ -45,6 +57,10 @@ api.interceptors.response.use(
         refreshPromise = refreshAccessToken().finally(() => {
           isRefreshing = false
         })
+      }
+
+      if (!refreshPromise) {
+        throw new Error('리프레시 토큰 갱신 실패')
       }
 
       // 리프레시 토큰 갱신 완료 후 새로운 액세스 토큰 설정
