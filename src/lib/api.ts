@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { token } from '@/lib/index'
-import { refreshAccessToken } from '@/api/auth.api'
-import { useAuthStore } from '@/store/auth.store'
+import { refreshAccessToken } from '@/api/index'
+import { useAuthStore } from '@/store/index'
 import { BASE_URL } from '@/data/index'
 
 export const api = axios.create({

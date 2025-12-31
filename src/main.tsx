@@ -1,13 +1,11 @@
 import { StrictMode } from 'react'
-
 import { createRoot } from 'react-dom/client'
-
 import './App.css'
 import './index.css'
 import App from './App.tsx'
 import { QueryClientProvider } from '@tanstack/react-query'
-import { queryClient } from './lib/queryClient.ts'
-import AuthProvider from '@/components/AuthProvider.tsx'
+import { queryClient } from '@/lib/index'
+import AuthProvider from './components/auth/AuthProvider.tsx'
 
 async function enableMocking() {
   if (process.env.NODE_ENV !== 'development') {
